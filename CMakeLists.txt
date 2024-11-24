@@ -138,7 +138,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/assignment_1_node.cpp)
 
-add_executable(UD_node src/UD.cpp)
+add_executable(UI_node src/UI.cpp)
 add_executable(Distance_node src/Distance.cpp)
 
 ## Rename C++ executable without prefix
@@ -151,7 +151,7 @@ add_executable(Distance_node src/Distance.cpp)
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_dependencies(UD_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(UI_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(Distance_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
@@ -159,7 +159,7 @@ add_dependencies(Distance_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPO
 #   ${catkin_LIBRARIES}
 # )
 
-target_linK_libraries(UD_node ${catkin_LIBRARIES})
+target_linK_libraries(UI_node ${catkin_LIBRARIES})
 target_linK_libraries(Distance_node ${catkin_LIBRARIES})
 
 #############
