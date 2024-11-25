@@ -15,6 +15,8 @@ int main (int argc, char **argv)
 	
 	pub = n.advertise<geometry_msgs::Twist>("turtle2/cmd_vel", 1); 
 	ros::ServiceClient client = n.serviceClient<turtlesim::Spawn>("/spawn");
+	
+	//Service request
 	turtlesim::Spawn spawn;
 	spawn.request.x = 2.0;
 	spawn.request.y = 1.0;
@@ -22,21 +24,25 @@ int main (int argc, char **argv)
 	spawn.request.name = "turtle2";	
 	client.call(spawn);
 	
+	//Variable for User Input
 	string turtle_name;
 	int turtle_choice;
 
+	//Sets the loop rate to 1Hz (1 cycle per second)
 	ros::Rate loop_rate(1);
 	
 	while (ros::ok()){
 	                  
 		double x_velocity, y_velocity, theta_velocity;
 		
+		//User Input for turtle selection
 		cout << "Choose a turtle:\n";
 		cout << "1. Turtle 1:\n";
 		cout << "2. Turtle 2:\n";
 		cout << "Enter your choice (1 or 2):";
 		cin >> turtle_choice;
-
+		
+		//Set target turtle
 		if (turtle_choice == 1){
 			turtle_name = "/turtle1/cmd_vel";
 		} else if (turtle_choice == 2) {
@@ -48,7 +54,8 @@ int main (int argc, char **argv)
 
 		ros::Publisher velocity_publisher = n.advertise<geometry_msgs::Twist>(turtle_name, 1);
 		geometry_msgs::Twist cmd_vel_msg;
-
+		
+		//User Input for velocities
 		cout << "Enter x velocity (m/s): ";
 		cin >> x_velocity;
 		cout << "Enter y velocity (m/s): ";
@@ -56,12 +63,14 @@ int main (int argc, char **argv)
 		cout << "Enter theta velocity (rad/s): ";
 		cin >> theta_velocity;
 		
+		//Create and publish velocity command
 		cmd_vel_msg.linear.x = x_velocity;
 		cmd_vel_msg.linear.y = y_velocity;
 		cmd_vel_msg.angular.z = theta_velocity;
 		velocity_publisher.publish(cmd_vel_msg);
-		ROS_INFO("Publish to %s -x: %f, -y: %f, -theta: %f",
-		turtle_name.c_str(), x_velocity, y_velocity, theta_velocity);
+		
+		//Logs message
+		ROS_INFO("Publish to %s -x: %f, -y: %f, -theta: %f",turtle_name.c_str(), x_velocity, y_velocity, theta_velocity);
 		
 		ros::spinOnce();
 		loop_rate.sleep();
