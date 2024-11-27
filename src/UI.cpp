@@ -16,13 +16,30 @@ int main (int argc, char **argv)
 	pub = n.advertise<geometry_msgs::Twist>("turtle2/cmd_vel", 1); 
 	ros::ServiceClient client = n.serviceClient<turtlesim::Spawn>("/spawn");
 	
+	//User input for spawn position
+	double x_position, y_position, theta_position;
+
+	cout << "Set x position to spawn the turtle2: ";
+	cin >> x_position;
+	cout << "Set y position to spawn the turtle2: ";
+	cin >> y_position;
+	cout << "Set theta position to spawn the turtle2: ";
+	cin >> theta_position;
+	
 	//Service request
 	turtlesim::Spawn spawn;
-	spawn.request.x = 2.0;
-	spawn.request.y = 1.0;
-	spawn.request.theta = 0.0;
-	spawn.request.name = "turtle2";	
-	client.call(spawn);
+	spawn.request.x = x_position;
+	spawn.request.y = y_position;
+	spawn.request.theta = theta_position;
+	spawn.request.name = "turtle2";
+	
+	if(client.call(spawn)){
+		ROS_INFO("Turtle spawned successfully at x: %f, y: %f, theta: %f", x_position, y_position, theta_position);
+	} else{
+		ROS_ERROR("Failed to spawn turtle.");
+		return 1;
+	}	
+	
 	
 	//Variable for User Input
 	string turtle_name;
