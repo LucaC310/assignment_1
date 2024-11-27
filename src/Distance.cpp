@@ -15,7 +15,7 @@ ros::Publisher distance_pub;
 ros::Publisher turtle1_stop_pub; 
 ros::Publisher turtle2_stop_pub; 
 float distance_threshold = 1.0; 
-float boundary_threshold = 1.0; 
+float boundary_threshold = 1.0;
 
 //Call back for turtle1's pose
 void turtle1PoseCallback(const turtlesim::Pose::ConstPtr& msg) {
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
             std_msgs::Float32 distance_msg;
             distance_msg.data = distance;
             distance_pub.publish(distance_msg);
-            
+
             //Check if turtles are too close
             if (distance < distance_threshold) {
                 ROS_WARN("Turtles are too close! Stopping turtle1.");
