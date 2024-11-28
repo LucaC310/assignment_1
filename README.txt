@@ -5,7 +5,8 @@ This repository contains a ROS package that features two nodes: UI_node and Dist
 Nodes Overview
 	1 -> UI_node
 		Functionality:
-		This node spawns a new turtle (turtle2) in turtlesim environments and allows the user to control the velocity of both turtles 		(turtle1 and turtle2).
+		This node spawns a new turtle (turtle2) in turtlesim environments and allows the user
+		to control the velocity of both turtles (turtle1 and turtle2).
 		
 		User Interaction:
 		o The user can choose where to spawn the turtle2 and decide which turtle to control.
@@ -14,7 +15,8 @@ Nodes Overview
 			
 	2 -> Distance_node
 		Functionality:
-		This node calculates the relative distance between turtle1 and turtle2 and publish this information on ROS topic.
+		This node calculates the relative distance between turtle1 and turtle2
+		and publish this information on ROS topic.
 		
 		Safety Features:
 		The turtles are stopped automatically if:
